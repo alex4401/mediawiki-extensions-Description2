@@ -2,6 +2,8 @@
 
 namespace MediaWiki\Extension\Description2;
 
+use Config;
+use ConfigFactory;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Parser;
@@ -25,6 +27,17 @@ class Hooks implements
 	\MediaWiki\Hook\ParserFirstCallInitHook,
 	\MediaWiki\Hook\OutputPageParserOutputHook
 {
+
+	private Config $config;
+	
+	/**
+	 * @param ConfigFactory $configFactory
+	 */
+	public function __construct(
+		ConfigFactory $configFactory
+	) {
+		$this->config = $configFactory->makeConfig( 'Description2' );
+	}
 
 	/**
 	 * @link https://www.mediawiki.org/wiki/Manual:Hooks/ParserAfterTidy
@@ -62,10 +75,7 @@ class Hooks implements
 	 * @return bool
 	 */
 	public function onParserFirstCallInit( $parser ) {
-		$config = MediaWikiServices::getInstance()
-			->getConfigFactory()
-			->makeConfig( 'Description2' );
-		if ( !$config->get( 'EnableMetaDescriptionFunctions' ) ) {
+		if ( !$this->config->get( 'EnableMetaDescriptionFunctions' ) ) {
 			// Functions and tags are disabled
 			return true;
 		}

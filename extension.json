@@ -32,7 +32,12 @@
 		]
 	},
 	"HookHandlers": {
-		"Description2": "MediaWiki\\Extension\\Description2\\Hooks"
+		"Description2": {
+			"class": "MediaWiki\\Extension\\Description2\\Hooks",
+			"services": [
+				"ConfigFactory"
+			]
+		}
 	},
 	"Hooks": {
 		"OutputPageParserOutput": "Description2",
