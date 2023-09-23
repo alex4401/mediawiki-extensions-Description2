@@ -13,7 +13,9 @@
 		"MediaWiki": ">= 1.39.0"
 	},
 	"config": {
-		"EnableMetaDescriptionFunctions": false
+		"EnableMetaDescriptionFunctions": {
+			"value": false
+		}
 	},
 	"ConfigRegistry": {
 		"Description2": "GlobalVarConfig::newInstance"
@@ -34,5 +36,5 @@
 		"ParserAfterTidy": "MediaWiki\\Extension\\Description2\\Description2::onParserAfterTidy",
 		"ParserFirstCallInit": "MediaWiki\\Extension\\Description2\\Description2::onParserFirstCallInit"
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }
