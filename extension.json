@@ -31,10 +31,13 @@
 			"i18n"
 		]
 	},
+	"HookHandlers": {
+		"Description2": "MediaWiki\\Extension\\Description2\\Hooks"
+	},
 	"Hooks": {
-		"OutputPageParserOutput": "MediaWiki\\Extension\\Description2\\Description2::onOutputPageParserOutput",
-		"ParserAfterTidy": "MediaWiki\\Extension\\Description2\\Description2::onParserAfterTidy",
-		"ParserFirstCallInit": "MediaWiki\\Extension\\Description2\\Description2::onParserFirstCallInit"
+		"OutputPageParserOutput": "Description2",
+		"ParserAfterTidy": "Description2",
+		"ParserFirstCallInit": "Description2"
 	},
 	"manifest_version": 2
 }
