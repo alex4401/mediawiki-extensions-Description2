@@ -1,15 +1,16 @@
 {
-	"name": "Description2",
+	"name": "Description2-ark",
 	"version": "0.4.1",
 	"author": [
-		"[http://danf.ca/mw/ Daniel Friesen]"
+		"[http://danf.ca/mw/ Daniel Friesen]",
+		"alex4401"
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:Description2",
 	"descriptionmsg": "description2-desc",
 	"license-name": "GPL-2.0-or-later",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.31.0"
+		"MediaWiki": ">= 1.39.0"
 	},
 	"config": {
 		"EnableMetaDescriptionFunctions": false
