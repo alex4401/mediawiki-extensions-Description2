@@ -70,6 +70,6 @@ class Description2 {
 			return $text;
 		}
 
-		return $truncatedText;
+		return trim( $truncatedText );
 	}
 }
