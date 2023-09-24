@@ -58,7 +58,10 @@ class Hooks implements
 	public function onParserAfterTidy( $parser, &$text ) {
 		$parserOutput = $parser->getOutput();
 
-		if ( $parserOutput->getPageProperty( 'description' ) !== null ) {
+		if (
+			$parser->getOptions()->getInterfaceMessage()
+			|| $parserOutput->getPageProperty( 'description' ) !== null
+		) {
 			return;
 		}
 
