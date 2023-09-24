@@ -43,6 +43,10 @@ class RemexDescriptionProvider implements DescriptionProvider {
 				$this->toRemove = $toRemove;
 			}
 
+			public function comment( SerializerNode $parent, $text ) {
+				return '';
+			}
+
 			public function element( SerializerNode $parent, SerializerNode $node, $contents ) {
 				// Read CSS classes off the node into an array for later
 				$nodeClasses = $node->attrs->getValues()['class'] ?? null;
