@@ -73,7 +73,10 @@ class Hooks implements
 		if ( $this->maxChars > 0 ) {
 			$truncated = Description2::getFirstChars( $desc, $this->maxChars );
 			if ( $truncated !== $desc ) {
-				$desc = $truncated . wfMessage( 'ellipsis' )->text();
+				$desc = $truncated;
+				if ( !preg_match( '/[。．.！？｡]$/', $truncated ) ) {
+					$desc = $truncated . wfMessage( 'ellipsis' )->text();
+				}
 			}
 		}
 
