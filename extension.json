@@ -15,6 +15,30 @@
 	"config": {
 		"EnableMetaDescriptionFunctions": {
 			"value": false
+		},
+		"UseSimpleDescriptionAlgorithm": {
+			"value": false
+		},
+		"DescriptionRemoveElements": {
+			"value": [
+				"table",
+				"script",
+				"style",
+				"figure",
+				"input",
+				"div.infobox",
+				"div.ambox",
+				"div.dmbox",
+				"ul.gallery",
+				".mw-editsection",
+				"span.reference",
+				"ul.references",
+				".error",
+				".nomobile",
+				".noprint",
+				".noexcerpt",
+				".sortkey"
+			]
 		}
 	},
 	"ConfigRegistry": {
