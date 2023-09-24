@@ -56,19 +56,25 @@ class Hooks implements
 	 * @return bool
 	 */
 	public function onParserAfterTidy( $parser, &$text ) {
-		if ( $parser->getOutput()->getPageProperty( 'description' ) !== null ) {
+		$parserOutput = $parser->getOutput();
+
+		if ( $parserOutput->getPageProperty( 'description' ) !== null ) {
 			return;
 		}
 
 		$desc = $this->descriptionProvider->derive( $text );
-		if ( $desc ) {
-			if ( $this->maxChars > 0 ) {
-				$desc = Description2::getFirstChars( $desc, $this->maxChars );
-			}
-			Description2::setDescription( $parser->getOutput(), $desc );
+		if ( !$desc ) {
+			return;
 		}
 
-		return true;
+		if ( $this->maxChars > 0 ) {
+			$truncated = Description2::getFirstChars( $desc, $this->maxChars );
+			if ( $truncated !== $desc ) {
+				$desc = $truncated . wfMessage( 'ellipsis' )->text();
+			}
+		}
+
+		Description2::setDescription( $parserOutput, $desc );
 	}
 
 	/**
