@@ -59,12 +59,15 @@ class RemexDescriptionProvider implements DescriptionProvider {
 					$split = explode( '.', $selectorish );
 					$tagName = array_shift( $split );
 
-					if (
-						( $tagName !== '' && $node->name === $tagName )
-						&& ( !$split || ( $nodeClasses && !array_diff( $split, $nodeClasses ) ) )
-					) {
-						return '';
+					if ( $tagName !== '' && $node->name !== $tagName ) {
+						continue;
 					}
+
+					if ( $split && ( !$nodeClasses || array_diff( $split, $nodeClasses ) ) ) {
+						continue;
+					}
+
+					return '';
 				}
 
 				return $contents;
