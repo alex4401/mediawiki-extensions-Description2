@@ -42,4 +42,34 @@ class Description2 {
 		self::setDescription( $parser->getOutput(), $desc );
 		return '';
 	}
+
+	/**
+	 * Returns no more than a requested number of characters, preserving words
+	 *
+	 * Borrowed from TextExtracts.
+	 *
+	 * @param string $text Source text to extract from
+	 * @param int $requestedLength Maximum number of characters to return
+	 * @return string
+	 */
+	public static function getFirstChars( string $text, int $requestedLength ) {
+		if ( $requestedLength <= 0 ) {
+			return '';
+		}
+
+		$length = mb_strlen( $text );
+		if ( $length <= $requestedLength ) {
+			return $text;
+		}
+
+		// This ungreedy pattern always matches, just might return an empty string
+		$pattern = '/^[\w\/]*>?/su';
+		preg_match( $pattern, mb_substr( $text, $requestedLength ), $m );
+		$truncatedText = mb_substr( $text, 0, $requestedLength ) . $m[0];
+		if ( $truncatedText === $text ) {
+			return $text;
+		}
+
+		return $truncatedText;
+	}
 }

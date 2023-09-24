@@ -39,6 +39,9 @@
 				".noexcerpt",
 				".sortkey"
 			]
+		},
+		"DescriptionMaxChars": {
+			"value": 200
 		}
 	},
 	"ConfigRegistry": {

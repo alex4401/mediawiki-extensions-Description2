@@ -34,6 +34,9 @@ class Hooks implements
 	/** @var DescriptionProvider */
 	private DescriptionProvider $descriptionProvider;
 
+	/** @var int */
+	private int $maxChars;
+
 	/**
 	 * @param ConfigFactory $configFactory
 	 */
@@ -42,6 +45,7 @@ class Hooks implements
 		DescriptionProvider $descriptionProvider
 	) {
 		$this->config = $configFactory->makeConfig( 'Description2' );
+		$this->maxChars = $this->config->get( 'DescriptionMaxChars' );
 		$this->descriptionProvider = $descriptionProvider;
 	}
 
@@ -58,6 +62,9 @@ class Hooks implements
 
 		$desc = $this->descriptionProvider->derive( $text );
 		if ( $desc ) {
+			if ( $this->maxChars > 0 ) {
+				$desc = Description2::getFirstChars( $desc, $this->maxChars );
+			}
 			Description2::setDescription( $parser->getOutput(), $desc );
 		}
 
