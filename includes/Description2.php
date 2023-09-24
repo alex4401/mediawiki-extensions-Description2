@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\Description2;
 
 use Parser;
+use ParserOutput;
 use PPFrame;
 
 /**
@@ -20,11 +21,10 @@ use PPFrame;
 class Description2 {
 
 	/**
-	 * @param Parser $parser The parser.
+	 * @param ParserOutput $parserOutput The parser output.
 	 * @param string $desc The description text.
 	 */
-	public static function setDescription( Parser $parser, $desc ) {
-		$parserOutput = $parser->getOutput();
+	public static function setDescription( ParserOutput $parserOutput, $desc ) {
 		if ( method_exists( $parserOutput, 'getPageProperty' ) ) {
 			// MW 1.38+
 			if ( $parserOutput->getPageProperty( 'description' ) !== null ) {
@@ -47,7 +47,7 @@ class Description2 {
 	 */
 	public static function parserFunctionCallback( Parser $parser, PPFrame $frame, $args ) {
 		$desc = isset( $args[0] ) ? $frame->expand( $args[0] ) : '';
-		self::setDescription( $parser, $desc );
+		self::setDescription( $parser->getOutput(), $desc );
 		return '';
 	}
 }

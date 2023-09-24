@@ -55,7 +55,7 @@ class Hooks implements
 		$desc = $this->descriptionProvider->derive( $text );
 
 		if ( $desc ) {
-			Description2::setDescription( $parser, $desc );
+			Description2::setDescription( $parser->getOutput(), $desc );
 		}
 
 		return true;
