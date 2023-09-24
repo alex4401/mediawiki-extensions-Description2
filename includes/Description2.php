@@ -25,18 +25,10 @@ class Description2 {
 	 * @param string $desc The description text.
 	 */
 	public static function setDescription( ParserOutput $parserOutput, $desc ) {
-		if ( method_exists( $parserOutput, 'getPageProperty' ) ) {
-			// MW 1.38+
-			if ( $parserOutput->getPageProperty( 'description' ) !== null ) {
-				return;
-			}
-			$parserOutput->setPageProperty( 'description', $desc );
-		} else {
-			if ( $parserOutput->getProperty( 'description' ) !== false ) {
-				return;
-			}
-			$parserOutput->setProperty( 'description', $desc );
+		if ( $parserOutput->getPageProperty( 'description' ) !== null ) {
+			return;
 		}
+		$parserOutput->setPageProperty( 'description', $desc );
 	}
 
 	/**
