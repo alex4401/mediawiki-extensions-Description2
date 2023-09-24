@@ -52,8 +52,11 @@ class Hooks implements
 	 * @return bool
 	 */
 	public function onParserAfterTidy( $parser, &$text ) {
-		$desc = $this->descriptionProvider->derive( $text );
+		if ( $parser->getOutput()->getPageProperty( 'description' ) !== null ) {
+			return;
+		}
 
+		$desc = $this->descriptionProvider->derive( $text );
 		if ( $desc ) {
 			Description2::setDescription( $parser->getOutput(), $desc );
 		}
