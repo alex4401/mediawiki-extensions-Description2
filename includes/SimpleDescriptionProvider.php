@@ -6,7 +6,7 @@ class SimpleDescriptionProvider implements DescriptionProvider {
 
 	/**
 	 * @param string $text
-     * @return string
+	 * @return string
 	 */
 	public function derive( string $text ): ?string {
 		$pattern = '%<table\b[^>]*+>(?:(?R)|[^<]*+(?:(?!</?table\b)<[^<]*+)*+)*+</table>%i';
@@ -20,14 +20,14 @@ class SimpleDescriptionProvider implements DescriptionProvider {
 					continue;
 				}
 
-                if ( $paragraph === '' ) {
-                    return null;
-                }
+				if ( $paragraph === '' ) {
+					return null;
+				}
 
 				return $paragraph;
 			}
 		}
 
-        return null;
-    }
+		return null;
+	}
 }

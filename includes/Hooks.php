@@ -33,7 +33,7 @@ class Hooks implements
 
 	/** @var DescriptionProvider */
 	private DescriptionProvider $descriptionProvider;
-	
+
 	/**
 	 * @param ConfigFactory $configFactory
 	 */
