@@ -22,6 +22,7 @@
 		"DescriptionRemoveElements": {
 			"value": [
 				"table",
+				"div",
 				"script",
 				"style",
 				"figure",
@@ -31,7 +32,7 @@
 				"div.dmbox",
 				"ul.gallery",
 				".mw-editsection",
-				"span.reference",
+				"sup.reference",
 				"ul.references",
 				".error",
 				".nomobile",
