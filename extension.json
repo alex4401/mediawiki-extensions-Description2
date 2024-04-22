@@ -1,8 +1,9 @@
 {
-	"name": "Description2",
-	"version": "0.4.1",
+	"name": "Description2 (wiki.gg)",
+	"version": "0.4.2",
 	"author": [
-		"[http://danf.ca/mw/ Daniel Friesen]"
+		"[http://danf.ca/mw/ Daniel Friesen]",
+		"alex4401"
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:Description2",
 	"descriptionmsg": "description2-desc",
