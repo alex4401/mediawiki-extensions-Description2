@@ -14,12 +14,15 @@ use Wikimedia\RemexHtml\TreeBuilder\TreeBuilder;
 class RemexDescriptionProvider implements DescriptionProvider {
 	/** @var string[] */
 	private array $toRemove;
+	/** @var bool */
+	private bool $useFirstSectionOnly;
 
 	/**
 	 * @param Config $config
 	 */
 	public function __construct( Config $config ) {
 		$this->toRemove = $config->get( 'DescriptionRemoveElements' );
+		$this->useFirstSectionOnly = $config->get( 'DescriptionFirstSectionOnly' );
 	}
 
 	/**
@@ -114,8 +117,10 @@ class RemexDescriptionProvider implements DescriptionProvider {
 		};
 
 		// Preserve only the first section
-		if ( preg_match( '/^.*?(?=<h[1-6]\b(?! id="mw-toc-heading"))/s', $text, $matches ) ) {
-			$text = $matches[0];
+		if ( $this->useFirstSectionOnly ) {
+			if ( preg_match( '/^.*?(?=<h[1-6]\b(?! id="mw-toc-heading"))/s', $text, $matches ) ) {
+				$text = $matches[0];
+			}
 		}
 
 		$serializer = new Serializer( $formatter );
