@@ -18,7 +18,6 @@
 		"DescriptionAlgorithm": "MediaWiki\\Extension\\Description2\\RemexDescriptionProvider",
 		"DescriptionRemoveElements": [
 			"table",
-			"div",
 			"script",
 			"style",
 			"figure",
