@@ -126,7 +126,11 @@ class RemexDescriptionProvider implements DescriptionProvider {
 		$serializer = new Serializer( $formatter );
 		$treeBuilder = new TreeBuilder( $serializer );
 		$dispatcher = new Dispatcher( $treeBuilder );
-		$tokenizer = new Tokenizer( $dispatcher, $text );
+		$tokenizer = new Tokenizer( $dispatcher, $text, [
+			'ignoreErrors' => true,
+			'skipPreprocess' => true,
+			'ignoreNulls' => true,
+		] );
 
 		$tokenizer->execute( [
 			'fragmentNamespace' => HTMLData::NS_HTML,
