@@ -77,6 +77,12 @@ class Hooks implements
 			return true;
 		}
 
+		// TEMP: Noita-specific behaviour. Only output the first line of the description.
+		// TODO: Awaiting admin configurability milestone
+		if ( str_contains( trim( wfMessage( 'wikigg-description2-noita-behav-tmp' )->inContentLanguage()->plain() ), 'yes' ) ) {
+			$desc = strstr( $desc, "\n", true );
+		}
+
 		if ( $this->maxChars > 0 ) {
 			$truncated = Description2::getFirstChars( $desc, $this->maxChars );
 			if ( $truncated !== $desc ) {
