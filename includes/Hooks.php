@@ -98,7 +98,7 @@ class Hooks implements
 			$desc = strstr( $desc, "\n", true );
 		}
 
-		if ( $this->maxChars > 0 ) {
+		if ( $this->maxChars > 0 && strlen( $desc ) > $this->maxChars ) {
 			$truncated = Description2::getFirstChars( $desc, $this->maxChars );
 			if ( $truncated !== $desc ) {
 				$desc = $truncated;
