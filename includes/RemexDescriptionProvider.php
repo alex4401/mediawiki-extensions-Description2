@@ -12,6 +12,8 @@ use Wikimedia\RemexHtml\TreeBuilder\Dispatcher;
 use Wikimedia\RemexHtml\TreeBuilder\TreeBuilder;
 
 class RemexDescriptionProvider implements DescriptionProvider {
+	public const CUT_ELEMENT_MARKER = "\2_d2_\3";
+
 	/** @var string[] */
 	private array $toRemove;
 	/** @var bool */
@@ -98,7 +100,8 @@ class RemexDescriptionProvider implements DescriptionProvider {
 						continue;
 					}
 
-					return '';
+					// Replace this element with a temporary marker, we'll use it to normalise white-space later
+					return RemexDescriptionProvider::CUT_ELEMENT_MARKER;
 				}
 
 				return $contents;
@@ -137,6 +140,21 @@ class RemexDescriptionProvider implements DescriptionProvider {
 			'fragmentName' => 'body',
 		] );
 
-		return trim( $serializer->getResult() );
+		$result = trim( $serializer->getResult() );
+
+		// Replace cut element markers
+		$result = str_replace(
+			[
+				' ' . self::CUT_ELEMENT_MARKER . ' ',
+				self::CUT_ELEMENT_MARKER,
+			],
+			[
+				' ',
+				'',
+			],
+			$result
+		);
+
+		return $result;
 	}
 }
