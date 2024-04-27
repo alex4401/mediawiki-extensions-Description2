@@ -87,6 +87,11 @@ class Hooks implements
 			return null;
 		}
 
+		$desc = trim( $desc );
+		if ( empty( $desc ) ) {
+			return null;
+		}
+
 		// TEMP: Noita-specific behaviour. Only output the first line of the description.
 		// TODO: Awaiting admin configurability milestone
 		if ( str_contains( trim( wfMessage( 'wikigg-description2-noita-behav-tmp' )->inContentLanguage()->plain() ), 'yes' ) ) {
