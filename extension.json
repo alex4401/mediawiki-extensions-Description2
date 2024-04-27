@@ -16,7 +16,7 @@
 		"EnableMetaDescriptionFunctions": false,
 		"DescriptionMaxChars": 300,
 		"DescriptionAlgorithm": "MediaWiki\\Extension\\Description2\\RemexDescriptionProvider",
-		"DescriptionFirstSectionOnly": false,
+		"DescriptionFirstSectionOnly": true,
 		"DescriptionRemoveElements": [
 			"table",
 			"script",

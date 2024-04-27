@@ -47,6 +47,31 @@ class RemexDescriptionProvider implements DescriptionProvider {
 	 * @return string
 	 */
 	public function derive( string $text ): ?string {
+		// If configuration tells us to try extracting with just the first section, cut the input at the ToC placeholder
+		// and see if we get any output (more than three characters).
+		// Otherwise, fall back onto running on the entire text.
+		if ( $this->useFirstSectionOnly ) {
+			// Match everything until the ToC placeholder. Since we're using a lookahead, this won't return anything if
+			// the placeholder is missing.
+			if ( preg_match( "/^.*(?=<meta property=\"mw:PageProp\/toc\")/s", $text, $matches ) ) {
+				$beforeToC = $matches[0];
+				$result = $this->deriveInternal( $beforeToC );
+				if ( strlen( $result ) > 3 ) {
+					return $result;
+				}
+			}
+		}
+
+		return $this->deriveInternal( $text );
+	}
+
+	/**
+	 * Internal method to perform the extract derivation.
+	 *
+	 * @param string $text
+	 * @return string
+	 */
+	private function deriveInternal( string $text ): ?string {
 		$formatter = new class( $options = [], $this->toRemove ) extends HtmlFormatter {
 
 			/** @var string[] */
@@ -118,13 +143,6 @@ class RemexDescriptionProvider implements DescriptionProvider {
 				return '';
 			}
 		};
-
-		// Preserve only the first section
-		if ( $this->useFirstSectionOnly ) {
-			if ( preg_match( '/^.*?(?=<h[1-6]\b(?! id="mw-toc-heading"))/s', $text, $matches ) ) {
-				$text = $matches[0];
-			}
-		}
 
 		$serializer = new Serializer( $formatter );
 		$treeBuilder = new TreeBuilder( $serializer );
