@@ -53,7 +53,7 @@ class RemexDescriptionProvider implements DescriptionProvider {
 		if ( $this->useFirstSectionOnly ) {
 			// Match everything until the ToC placeholder. Since we're using a lookahead, this won't return anything if
 			// the placeholder is missing.
-			if ( preg_match( "/^.*(?=<meta property=\"mw:PageProp\/toc\")/s", $text, $matches ) ) {
+			if ( preg_match( "/^.*(?=(?:<meta property=\"mw:PageProp\/toc\"|<mw:tocplace))/s", $text, $matches ) ) {
 				$beforeToC = $matches[0];
 				$result = $this->deriveInternal( $beforeToC );
 				if ( strlen( $result ) > 3 ) {
