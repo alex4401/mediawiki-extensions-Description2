@@ -140,23 +140,34 @@ class RemexDescriptionProvider implements DescriptionProvider {
 			'fragmentName' => 'body',
 		] );
 
-		$result = trim( $serializer->getResult() );
+		$result = $serializer->getResult();
 
 		// Normalise some HTML entities
 		$result = htmlspecialchars_decode( $result );
 
-		// Replace cut element markers
+		// Replace cut element markers and double new lines
 		$result = str_replace(
 			[
 				' ' . self::CUT_ELEMENT_MARKER . ' ',
+				self::CUT_ELEMENT_MARKER . ' ',
+				' ' . self::CUT_ELEMENT_MARKER . "\n",
+				"\n" . self::CUT_ELEMENT_MARKER . "\n",
+				"\n" . self::CUT_ELEMENT_MARKER . ' ',
 				self::CUT_ELEMENT_MARKER,
+				"\n\n",
 			],
 			[
 				' ',
+				"\n",
+				"\n",
+				"\n",
 				'',
+				"\n",
 			],
 			$result
 		);
+
+		$result = trim( $result );
 
 		return $result;
 	}
