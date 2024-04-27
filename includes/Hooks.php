@@ -53,6 +53,10 @@ class Hooks implements
 	 * @return bool
 	 */
 	public function onParserAfterTidy( $parser, &$text ) {
+		if ( str_contains( $text, '<span class="fileInfo">' ) ) {
+			return;
+		}
+
 		$parserOutput = $parser->getOutput();
 
 		// Avoid running the algorithm on interface messages which may waste time
