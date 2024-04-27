@@ -142,6 +142,9 @@ class RemexDescriptionProvider implements DescriptionProvider {
 
 		$result = trim( $serializer->getResult() );
 
+		// Normalise some HTML entities
+		$result = htmlspecialchars_decode( $result );
+
 		// Replace cut element markers
 		$result = str_replace(
 			[
