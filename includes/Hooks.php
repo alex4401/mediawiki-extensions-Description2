@@ -72,9 +72,19 @@ class Hooks implements
 			return true;
 		}
 
-		$desc = $this->descriptionProvider->derive( $text );
+		$desc = $this->createExtract( $text );
 		if ( !$desc ) {
 			return true;
+		}
+
+		Description2::setDescription( $parser, $desc );
+		return true;
+	}
+
+	private function createExtract( string $text ): ?string {
+		$desc = $this->descriptionProvider->derive( $text );
+		if ( !$desc ) {
+			return null;
 		}
 
 		// TEMP: Noita-specific behaviour. Only output the first line of the description.
@@ -93,8 +103,7 @@ class Hooks implements
 			}
 		}
 
-		Description2::setDescription( $parser, $desc );
-		return true;
+		return $desc;
 	}
 
 	/**
