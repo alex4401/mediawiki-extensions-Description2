@@ -22,6 +22,7 @@
 			"script",
 			"style",
 			"figure",
+			"div.thumb",
 			"input",
 			"div.infobox",
 			"div.ambox",
