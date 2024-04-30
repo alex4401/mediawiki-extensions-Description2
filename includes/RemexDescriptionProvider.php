@@ -160,30 +160,19 @@ class RemexDescriptionProvider implements DescriptionProvider {
 
 		$result = $serializer->getResult();
 
-		// Normalise some HTML entities
+		// Reduce white-space
+		$replacements = [
+			'&nbsp;' => ' ',
+			' ' . self::CUT_ELEMENT_MARKER . ' ' => ' ',
+			self::CUT_ELEMENT_MARKER => '',
+			'  ' => ' ',
+			'( ' => '(',
+			' )' => ')',
+			"\n\n" => "\n",
+		];
+		$result = str_replace( array_keys( $replacements ), array_values( $replacements ), $result );
+		// Decode HTML entities
 		$result = htmlspecialchars_decode( $result );
-
-		// Replace cut element markers and double new lines
-		$result = str_replace(
-			[
-				' ' . self::CUT_ELEMENT_MARKER . ' ',
-				self::CUT_ELEMENT_MARKER . ' ',
-				' ' . self::CUT_ELEMENT_MARKER . "\n",
-				"\n" . self::CUT_ELEMENT_MARKER . "\n",
-				"\n" . self::CUT_ELEMENT_MARKER . ' ',
-				self::CUT_ELEMENT_MARKER,
-				"\n\n",
-			],
-			[
-				' ',
-				"\n",
-				"\n",
-				"\n",
-				'',
-				"\n",
-			],
-			$result
-		);
 
 		$result = trim( $result );
 
