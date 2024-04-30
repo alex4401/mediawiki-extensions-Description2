@@ -98,8 +98,11 @@ class Hooks implements
 
 		// TEMP: Noita-specific behaviour. Only output the first line of the description.
 		// TODO: Awaiting admin configurability milestone
-		if ( str_contains( trim( wfMessage( 'wikigg-description2-noita-behav-tmp' )->inContentLanguage()->plain() ), 'yes' ) ) {
-			$desc = strstr( $desc, "\n", true );
+		$noitaSingleLine = str_contains( trim(
+			wfMessage( 'wikigg-description2-noita-behav-tmp' )->inContentLanguage()->plain() ), 'yes' );
+		if ( $noitaSingleLine ) {
+			$truncated = strstr( $desc, "\n", true );
+			$desc = $truncated ? $truncated : $desc;
 		}
 
 		if ( $this->maxChars > 0 && strlen( $desc ) > $this->maxChars ) {
