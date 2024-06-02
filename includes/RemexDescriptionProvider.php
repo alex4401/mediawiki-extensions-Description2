@@ -161,10 +161,12 @@ class RemexDescriptionProvider implements DescriptionProvider {
 		$result = $serializer->getResult();
 
 		// Reduce white-space
-		$replacements = [
+		static $replacements = [
 			'&nbsp;' => ' ',
 			' ' . self::CUT_ELEMENT_MARKER . ' ' => ' ',
 			self::CUT_ELEMENT_MARKER => '',
+			' , ' => ', ',
+			' .' => '.',
 			'  ' => ' ',
 			'( ' => '(',
 			' )' => ')',
